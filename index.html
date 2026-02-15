@@ -172,20 +172,15 @@
 
         /* --- DESKTOP GRID SYSTEM (WAJIB GRID DI DESKTOP) --- */
         @media (min-width: 900px) {
-            /* 1. Container Melebar */
             #mainView {
-                max-width: 1200px; /* Lebar maksimum desktop */
+                max-width: 1200px;
                 padding: 0 40px;
             }
-
-            /* 2. Ubah List Container jadi GRID */
             .list-container {
-                display: grid; /* Grid System */
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Kolom Otomatis */
-                gap: 20px; /* Jarak antar kotak */
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 20px;
             }
-
-            /* 3. Penyesuaian Header */
             header { padding: 0 5%; }
             .search-wrap { max-width: 600px; }
         }
@@ -310,21 +305,21 @@
 
         const dbApps = [
     { name: "CapCut v16.9.0 MOD APK (Pro, Premium Unlocked)", img: "/apps/CapCut%20v16.9.0%20MOD%20APK%20(Pro%2C%20Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/CapCut%20v16.9.0%20MOD%20APK%20(Pro%2C%20Premium%20Unlocked)/", type: "app" },
-    { name: "Video Compressor MOD APK v19.1.0", img: "https://modora-mod1.my.id/apps/Video%20Compressor%20MOD%20APK%20v19.1.0/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Video%20Compressor%20MOD%20APK%20v19.1.0", type: "app" },
-    { name: "CamScanner v7.12.0.2602050000 MOD APK [Premium Unlocked]", img: "https://modora-mod1.my.id/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "PhotoRoom v2026.07.02 MOD APK [Pro Unlocked, Premium]", img: "https://modora-mod1.my.id/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D", type: "app" },
-    { name: "Picsart Premium v29.3.5 MOD APK [Unlocked Premium]", img: "https://modora-mod1.my.id/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D", type: "app" },
-    { name: "VivaVideo Pro v9.33.5 MOD APK [Premium/VIP Unlocked]", img: "https://modora-mod1.my.id/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D", type: "app" },
-    { name: "Bstation  v3.63.0 MOD APK (Premium Unlocked)", img: "https://modora-mod1.my.id/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
-    { name: "Loklok v3.22.0 MOD APK (VIP Unlocked, No ADS)", img: "https://modora-mod1.my.id/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)", type: "app" },
-    { name: "CapCut MOD APK v16.6.0 (Premium Unlocked)", img: "https://modora-mod1.my.id/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)", type: "app" },
-    { name: "DramaBox v5.0.2 Mod APK (Premium Unlocked)", img: "https://modora-mod1.my.id/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)", type: "app" },
-    { name: "Melolo v5.1.0 MOD APK (Premium Unlocked)", img: "https://modora-mod1.my.id/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
-    { name: "Alight Motion Pro v5.0.273.1028414 MOD APK [Full Pro] [Premium Unlocked]", img: "https://modora-mod1.my.id/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "Moises v2.113.0 MOD APK [Premium Unlocked]", img: "https://modora-mod1.my.id/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "Pixelcut v0.9.40 MOD APK [Premium Unlocked]", img: "https://modora-mod1.my.id/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "InShot Pro APK v2.193.1526 [MOD, PRO Unlocked]", img: "https://modora-mod1.my.id/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D", type: "app" },
-    { name: "TeraBox v4.13.0 Mod APK (Premium Unlocked)", img: "https://modora-mod1.my.id/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)", type: "app" }
+    { name: "Video Compressor MOD APK v19.1.0", img: "/apps/Video%20Compressor%20MOD%20APK%20v19.1.0/MODORA-Images.jpg", link: "/apps/Video%20Compressor%20MOD%20APK%20v19.1.0", type: "app" },
+    { name: "CamScanner v7.12.0.2602050000 MOD APK [Premium Unlocked]", img: "/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
+    { name: "PhotoRoom v2026.07.02 MOD APK [Pro Unlocked, Premium]", img: "/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D/MODORA-Images.jpg", link: "/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D", type: "app" },
+    { name: "Picsart Premium v29.3.5 MOD APK [Unlocked Premium]", img: "/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D/MODORA-Images.jpg", link: "/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D", type: "app" },
+    { name: "VivaVideo Pro v9.33.5 MOD APK [Premium/VIP Unlocked]", img: "/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D", type: "app" },
+    { name: "Bstation  v3.63.0 MOD APK (Premium Unlocked)", img: "/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
+    { name: "Loklok v3.22.0 MOD APK (VIP Unlocked, No ADS)", img: "/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)/MODORA-Images.jpg", link: "/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)", type: "app" },
+    { name: "CapCut MOD APK v16.6.0 (Premium Unlocked)", img: "/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)", type: "app" },
+    { name: "DramaBox v5.0.2 Mod APK (Premium Unlocked)", img: "/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)", type: "app" },
+    { name: "Melolo v5.1.0 MOD APK (Premium Unlocked)", img: "/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
+    { name: "Alight Motion Pro v5.0.273.1028414 MOD APK [Full Pro] [Premium Unlocked]", img: "/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D", type: "app" },
+    { name: "Moises v2.113.0 MOD APK [Premium Unlocked]", img: "/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
+    { name: "Pixelcut v0.9.40 MOD APK [Premium Unlocked]", img: "/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
+    { name: "InShot Pro APK v2.193.1526 [MOD, PRO Unlocked]", img: "/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D", type: "app" },
+    { name: "TeraBox v4.13.0 Mod APK (Premium Unlocked)", img: "/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)", type: "app" }
         ];
 
         const dbGames = [
@@ -333,13 +328,13 @@
     { name: "Hungry Shark World v7.5.1 MOD APK [Unlimited Money/Gems]", img: "/games/Hungry%20Shark%20World%20v7.5.1%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/MODORA-Images.jpg", link: "/games/Hungry%20Shark%20World%20v7.5.1%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/", type: "game" },
     { name: "Zombie Tsunami v4.6.9 MOD APK (Money, Unlocked all, Max Level)", img: "/games/Zombie%20Tsunami%20v4.6.9%20MOD%20APK%20(Money%2C%20Unlocked%20all%2C%20Max%20Level)/MODORA-Images.jpg", link: "/games/Zombie%20Tsunami%20v4.6.9%20MOD%20APK%20(Money%2C%20Unlocked%20all%2C%20Max%20Level)/", type: "game" },
     { name: "Galaxy Attack: Alien Shooter v70.7 MOD APK (Unlimited Money/VIP Unlocked)", img: "/games/Galaxy%20Attack%3A%20Alien%20Shooter%20v70.7%20MOD%20APK%20(Unlimited%20Money%2FVIP%20Unlocked)/MODORA-Images.jpg", link: "/games/Galaxy%20Attack%3A%20Alien%20Shooter%20v70.7%20MOD%20APK%20(Unlimited%20Money%2FVIP%20Unlocked)/", type: "game" },
-    { name: "Sonic Dash (MOD, Unlimited Money) v9.4.0", img: "https://modora-mod1.my.id/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0/MODORA-Images.jpg", link: "https://modora-mod1.my.id/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0", type: "game" },
-    { name: "Subway Surfers (MOD, Unlimited Coins/Keys) v3.58.4", img: "https://modora-mod1.my.id/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4/MODORA-Images.jpg", link: "https://modora-mod1.my.id/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4", type: "game" },
-    { name: "Zooba v6.3.4 MOD APK (Show Enemies, Always Shot, DroneView)", img: "https://modora-mod1.my.id/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)/MODORA-Images.jpg", link: "https://modora-mod1.my.id/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)", type: "game" },
-    { name: "Mad Skills Motocross 2 (MOD, Rockets/Unlocked) v2.55.5014", img: "https://modora-mod1.my.id/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014", type: "game" },
-    { name: "Mad Skills Motocross 3 (MOD, Unlimited Money) v4.10.0", img: "https://modora-mod1.my.id/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0/MODORA-Images.jpg", link: "https://modora-mod1.my.id/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0", type: "game" },            
-    { name: "Badminton League (MOD, Unlimited Coins) v3.71.3957", img: "https://modora-mod1.my.id/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957/MODORA-Images.jpg", link: "https://modora-mod1.my.id/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957", type: "game" },
-    { name: "Football League 2026 (MOD, Unlimited Coins) v0.1.79", img: "https://modora-mod1.my.id/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79/MODORA-Images.jpg", link: "https://modora-mod1.my.id/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79", type: "game" }
+    { name: "Sonic Dash (MOD, Unlimited Money) v9.4.0", img: "/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0/MODORA-Images.jpg", link: "/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0", type: "game" },
+    { name: "Subway Surfers (MOD, Unlimited Coins/Keys) v3.58.4", img: "/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4/MODORA-Images.jpg", link: "/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4", type: "game" },
+    { name: "Zooba v6.3.4 MOD APK (Show Enemies, Always Shot, DroneView)", img: "/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)/MODORA-Images.jpg", link: "/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)", type: "game" },
+    { name: "Mad Skills Motocross 2 (MOD, Rockets/Unlocked) v2.55.5014", img: "/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014/MODORA-Images.jpg", link: "/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014", type: "game" },
+    { name: "Mad Skills Motocross 3 (MOD, Unlimited Money) v4.10.0", img: "/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0/MODORA-Images.jpg", link: "/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0", type: "game" },            
+    { name: "Badminton League (MOD, Unlimited Coins) v3.71.3957", img: "/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957/MODORA-Images.jpg", link: "/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957", type: "game" },
+    { name: "Football League 2026 (MOD, Unlimited Coins) v0.1.79", img: "/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79/MODORA-Images.jpg", link: "/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79", type: "game" }
         ];
 
         let showAppsCount = 10;
@@ -422,18 +417,50 @@
 
         function doSearch() {
             const val = document.getElementById('search').value.toLowerCase();
+            
+            // Element Sections
+            const secRecom = document.getElementById('section-recom');
+            const secApps = document.getElementById('section-apps');
+            const secGames = document.getElementById('section-games');
+
             if(val === '') {
+                // Restore View based on active tab
+                const navItems = document.querySelectorAll('.nav-item');
+                let activeType = 'all'; // default
+                
+                if(navItems[1].classList.contains('active')) activeType = 'app';
+                else if(navItems[2].classList.contains('active')) activeType = 'game';
+                
+                if(activeType === 'all') {
+                    secRecom.style.display = 'block';
+                    secApps.style.display = 'block';
+                    secGames.style.display = 'block';
+                } else if(activeType === 'app') {
+                    secRecom.style.display = 'none';
+                    secApps.style.display = 'block';
+                    secGames.style.display = 'none';
+                } else if(activeType === 'game') {
+                    secRecom.style.display = 'none';
+                    secApps.style.display = 'none';
+                    secGames.style.display = 'block';
+                }
+
                 showAppsCount = 10; showGamesCount = 10;
                 renderAppsList(); renderGamesList();
                 return;
             }
+            
+            // SEARCH MODE: Hide Recom, Show Both Result Containers
+            secRecom.style.display = 'none';
+            secApps.style.display = 'block';
+            secGames.style.display = 'block';
             
             const fApps = dbApps.filter(i => i.name.toLowerCase().includes(val));
             let hApp = '';
             fApps.forEach(item => {
                 hApp += `<div class="clean-card" onclick="openLink('${item.link}')"><div class="icon-wrap"><img src="${item.img}" class="clean-icon"><div class="mod-label">MOD</div></div><div class="clean-info"><div class="clean-name">${item.name}</div></div><button class="btn-unduh">UNDUH</button></div>`;
             });
-            document.getElementById('appsContainer').innerHTML = hApp || '<div style="text-align:center; color:#999;">Tidak ditemukan</div>';
+            document.getElementById('appsContainer').innerHTML = hApp || '<div style="text-align:center; color:#999; padding:15px; font-size:13px;">Tidak ditemukan</div>';
             document.getElementById('btnMoreApps').classList.add('hidden');
 
             const fGames = dbGames.filter(i => i.name.toLowerCase().includes(val));
@@ -441,7 +468,7 @@
             fGames.forEach(item => {
                 hGame += `<div class="clean-card" onclick="openLink('${item.link}')"><div class="icon-wrap"><img src="${item.img}" class="clean-icon"><div class="mod-label">MOD</div></div><div class="clean-info"><div class="clean-name">${item.name}</div></div><button class="btn-unduh">UNDUH</button></div>`;
             });
-            document.getElementById('gamesContainer').innerHTML = hGame || '<div style="text-align:center; color:#999;">Tidak ditemukan</div>';
+            document.getElementById('gamesContainer').innerHTML = hGame || '<div style="text-align:center; color:#999; padding:15px; font-size:13px;">Tidak ditemukan</div>';
             document.getElementById('btnMoreGames').classList.add('hidden');
         }
 
@@ -484,6 +511,3 @@
     </script>
 </body>
 </html>
-
-
-
