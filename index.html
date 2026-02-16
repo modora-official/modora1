@@ -6,11 +6,10 @@
     
     <title>MODORA - Unduh apps and games mod apk</title>
     <meta name="description" content="Unduh apps and game mod apk pro premium free for android.">
-    <meta name="keywords" content="mod apk, download aplikasi mod, game mod, premium unlocked, android mod">
     <meta name="author" content="MODORA Inc.">
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/nixy-pro/1@main/random/2026-02-07T14-36-29-180Z-IMG_20260207_212929_010.jpg" type="image/png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -21,11 +20,16 @@
             
             --bg-body: #f8fafc;
             --bg-card: #ffffff;
-            --bg-glass: rgba(255, 255, 255, 0.98);
+            --bg-glass: rgba(255, 255, 255, 0.90); /* Blur opacity */
+            --glass-blur: blur(12px);
+            
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --primary: #2563eb;
+            
+            /* Dynamic Color Variables (Bisa Diganti) */
+            --primary: #2563eb; 
             --secondary: #4f46e5;
+            
             --accent: #ef4444; 
             --border: #e2e8f0;
             --shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
@@ -36,192 +40,212 @@
         body.dark-mode {
             --bg-body: #0f172a;
             --bg-card: #1e293b;
-            --bg-glass: rgba(15, 23, 42, 0.98);
+            --bg-glass: rgba(15, 23, 42, 0.90);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --primary: #38bdf8;
-            --secondary: #818cf8;
             --border: #334155;
             --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mode Hemat Baterai (No Blur) */
+        body.eco-mode {
+            --bg-glass: var(--bg-card); /* Solid background */
+            --glass-blur: none;
         }
 
         /* --- RESET & LAYOUT --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-main); outline: none; -webkit-tap-highlight-color: transparent; }
         
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
+        html, body { width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         body { 
-            background-color: var(--bg-body); 
-            color: var(--text-main); 
-            padding-top: calc(var(--header-h) + 15px);
-            padding-bottom: calc(var(--nav-h) + 30px);
+            background-color: var(--bg-body); color: var(--text-main); 
+            padding-top: calc(var(--header-h) + 15px); padding-bottom: calc(var(--nav-h) + 30px);
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        /* --- CONTAINER UTAMA (RESPONSIVE) --- */
-        #mainView {
-            width: 100%;
-            padding: 0 24px;
-            margin: 0 auto;
-            max-width: 600px; /* Default Mobile */
-            transition: max-width 0.3s ease;
-        }
+        #mainView { width: 100%; padding: 0 24px; margin: 0 auto; max-width: 600px; transition: max-width 0.3s ease; }
 
         /* --- HEADER --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h);
-            padding: 0 24px; background: var(--bg-glass); backdrop-filter: blur(12px);
+            padding: 0 24px; background: var(--bg-glass); backdrop-filter: var(--glass-blur);
             display: flex; align-items: center; justify-content: space-between;
             border-bottom: 1px solid var(--border); z-index: 1000;
+            transition: background 0.3s, border 0.3s;
         }
-        .logo { font-size: 24px; font-weight: 800; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+        .logo { font-size: 24px; font-weight: 800; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; cursor: pointer; }
         
         .search-wrap { flex: 1; margin: 0 15px; position: relative; max-width: 400px; }
-        .search-input { width: 100%; padding: 10px 40px 10px 15px; border-radius: 50px; border: 1px solid var(--border); background: var(--bg-body); color: var(--text-main); font-size: 14px; }
-        .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; }
-        .btn-tele { width: 40px; height: 40px; background: #29b6f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; text-decoration: none; }
+        .search-input { width: 100%; padding: 10px 40px 10px 15px; border-radius: 50px; border: 1px solid var(--border); background: var(--bg-body); color: var(--text-main); font-size: 14px; transition: 0.3s; }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; pointer-events: none; }
+        .btn-tele { width: 40px; height: 40px; background: #29b6f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; text-decoration: none; transition: transform 0.2s; }
+        .btn-tele:active { transform: scale(0.9); }
 
         /* --- REKOMENDASI --- */
-        .section-head { 
-            font-size: 17px; font-weight: 700; margin-bottom: 15px; margin-top: 25px;
-            display: flex; align-items: center; gap: 8px;
-        }
+        .section-head { font-size: 17px; font-weight: 700; margin-bottom: 15px; margin-top: 25px; display: flex; align-items: center; gap: 8px; }
         .section-head i { color: #f59e0b; }
-
-        .recom-wrap {
-            margin-right: -24px; padding-right: 24px;
-            overflow-x: auto; padding-bottom: 20px;
-            scrollbar-width: none;
-        }
+        .recom-wrap { margin-right: -24px; padding-right: 24px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
         .recom-wrap::-webkit-scrollbar { display: none; }
         .recom-scroll { display: flex; gap: 15px; width: max-content; }
 
         .trend-card {
-            width: 290px; height: 160px; border-radius: 20px;
-            background: var(--bg-card);
+            width: 290px; height: 160px; border-radius: 20px; background: var(--bg-card);
             border: 1px solid var(--border); position: relative; overflow: hidden;
             padding: 20px; display: flex; flex-direction: column; justify-content: center;
-            box-shadow: var(--shadow); cursor: pointer;
+            box-shadow: var(--shadow); cursor: pointer; transition: transform 0.2s;
         }
-        .trend-bg { 
-            position: absolute; right: -25px; bottom: -25px; width: 150px; 
-            opacity: 0.5; filter: blur(5px);
-            transform: rotate(-15deg); transition: 0.4s;
-        }
-        .trend-badge { position: absolute; top: 15px; right: 15px; background: var(--primary); color: white; font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 700; z-index: 2; }
+        .trend-card:active { transform: scale(0.98); }
+        .trend-bg { position: absolute; right: -25px; bottom: -25px; width: 150px; opacity: 0.5; filter: blur(5px); transform: rotate(-15deg); transition: 0.4s; }
+        .trend-badge { position: absolute; top: 15px; right: 15px; background: var(--primary); color: white; font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 700; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .trend-name { font-size: 18px; font-weight: 800; width: 90%; line-height: 1.3; margin-bottom: 5px; z-index: 2; position: relative; }
         .trend-act { font-size: 12px; color: var(--text-muted); font-weight: 600; z-index: 2; position: relative; }
 
-        /* --- LIST CONTAINER (MOBILE DEFAULT) --- */
-        .list-container { 
-            display: flex; 
-            flex-direction: column; /* Mobile: Kebawah */
-            gap: 12px; 
-            width: 100%;
-        }
+        /* --- LIST & GRID --- */
+        .list-container { width: 100%; display: grid; gap: 12px; }
+        .list-container.view-list { grid-template-columns: 1fr; }
+        .list-container.view-grid { grid-template-columns: repeat(2, 1fr); }
 
-        /* --- CARD STYLE --- */
         .clean-card {
-            background: var(--bg-card); padding: 0 15px; border-radius: 16px;
-            border: 1px solid var(--border); 
-            display: flex; align-items: center; gap: 15px;
+            background: var(--bg-card); padding: 12px; border-radius: 16px;
+            border: 1px solid var(--border); display: flex; align-items: center; gap: 12px;
             cursor: pointer; transition: 0.2s; box-shadow: var(--shadow);
-            width: 100%; height: 78px;
+            position: relative; overflow: hidden;
         }
-        .clean-card:active { transform: scale(0.98); background: var(--bg-body); }
-        .clean-card:hover { border-color: var(--primary); }
-        
-        .icon-wrap { position: relative; width: 50px; height: 50px; flex-shrink: 0; }
-        .clean-icon { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .clean-card:active { transform: scale(0.98); }
 
+        /* Grid specific */
+        .view-grid .clean-card { flex-direction: column; text-align: center; height: auto; padding: 15px; }
+        .view-grid .clean-card .icon-wrap { width: 60px; height: 60px; margin-bottom: 5px; }
+        .view-grid .clean-card .clean-info { width: 100%; justify-content: center; }
+        .view-grid .clean-card .clean-name { -webkit-line-clamp: 2; height: 2.6em; }
+        .view-grid .clean-card .btn-unduh { width: 100%; margin-top: 8px; }
+
+        .icon-wrap { position: relative; width: 50px; height: 50px; flex-shrink: 0; }
+        .clean-icon { width: 100%; height: 100%; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .mod-label {
-            position: absolute; bottom: -2px; right: -4px;
-            background: var(--accent); color: white;
-            font-size: 8px; font-weight: 800; padding: 2px 6px;
-            border-radius: 8px; border: 1px solid var(--bg-card);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 5;
+            position: absolute; bottom: -4px; right: -4px; background: var(--accent); color: white;
+            font-size: 8px; font-weight: 800; padding: 2px 5px; border-radius: 6px; 
+            border: 2px solid var(--bg-card); box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 5;
         }
         
-        .clean-info { flex: 1; min-width: 0; display: flex; align-items: center; height: 100%; }
+        .clean-info { flex: 1; min-width: 0; display: flex; align-items: center; }
         .clean-name { 
-            font-size: 15px; font-weight: 700; color: var(--text-main);
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
-            display: block; width: 100%;
+            font-size: 13px; font-weight: 700; color: var(--text-main);
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+            overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
         }
 
         .btn-unduh {
-            background: rgba(37, 99, 235, 0.08); color: var(--primary);
-            padding: 0 18px; height: 34px; 
-            border-radius: 50px; font-size: 11px; font-weight: 800; border: none;
+            background: rgba(37, 99, 235, 0.08); /* Fallback */
+            background: color-mix(in srgb, var(--primary) 10%, transparent); /* Modern */
+            color: var(--primary);
+            padding: 6px 14px; height: auto; min-height: 30px;
+            border-radius: 50px; font-size: 10px; font-weight: 800; border: none;
             display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; 
+            flex-shrink: 0; transition: 0.2s;
         }
-        body.dark-mode .btn-unduh { background: rgba(56, 189, 248, 0.15); }
-
+        
         .btn-loadmore {
-            width: 100%; padding: 14px; margin-top: 15px;
-            background: var(--bg-card); border: 1px dashed var(--border);
-            color: var(--primary); font-weight: 700; font-size: 13px;
-            border-radius: 50px; cursor: pointer; text-align: center;
-            transition: 0.3s;
+            width: 100%; padding: 14px; margin-top: 15px; background: var(--bg-card); 
+            border: 1px dashed var(--border); color: var(--primary); font-weight: 700; font-size: 13px;
+            border-radius: 50px; cursor: pointer; text-align: center; transition: 0.3s;
         }
         .btn-loadmore.hidden { display: none; }
 
-        /* --- DESKTOP GRID SYSTEM (WAJIB GRID DI DESKTOP) --- */
+        /* --- DESKTOP --- */
         @media (min-width: 900px) {
-            #mainView {
-                max-width: 1200px;
-                padding: 0 40px;
-            }
-            .list-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                gap: 20px;
-            }
+            #mainView { max-width: 1200px; padding: 0 40px; }
+            .list-container.view-list { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+            .list-container.view-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
             header { padding: 0 5%; }
             .search-wrap { max-width: 600px; }
         }
 
-        /* --- UI ELEMENTS --- */
+        /* --- ROCKET --- */
         .rocket-wrap { 
             position: fixed; bottom: 90px; right: 24px; 
-            opacity: 0; visibility: hidden; transition: 0.4s; z-index: 2000;
+            opacity: 0; visibility: hidden; transition: opacity 0.4s; z-index: 2000;
         }
         .rocket-wrap.show { opacity: 1; visibility: visible; }
         .rocket-btn {
             width: 50px; height: 50px; background: linear-gradient(to top, var(--secondary), var(--primary));
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 20px; cursor: pointer; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            color: white; font-size: 20px; cursor: pointer; 
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            position: relative; transition: transform 0.2s;
         }
         .rocket-btn i { transform: rotate(-45deg); transition: 0.3s; }
-        .launching { animation: flyUp 0.8s forwards; }
-        @keyframes flyUp { to { transform: translateY(-100vh); opacity: 0; } }
+        /* Particles */
+        .smoke-particle {
+            position: absolute; width: 10px; height: 10px; background: rgba(200,200,200,0.8);
+            border-radius: 50%; bottom: -10px; left: 50%; transform: translateX(-50%);
+            animation: puff 1s ease-out forwards; z-index: -1; pointer-events: none;
+        }
+        @keyframes puff { 0% { transform: translate(-50%, 0) scale(1); opacity: 0.8; } 100% { transform: translate(var(--tx), 50px) scale(3); opacity: 0; } }
+        .launching { animation: rocketFly 1.5s cubic-bezier(0.45, 0, 0.55, 1) forwards; }
+        .vibrating { animation: vibrate 0.3s linear infinite; }
+        @keyframes vibrate { 0% { transform: translate(0, 0) rotate(0deg); } 25% { transform: translate(-2px, 2px) rotate(-2deg); } 50% { transform: translate(2px, -2px) rotate(2deg); } 75% { transform: translate(-2px, -2px) rotate(-2deg); } 100% { transform: translate(0, 0) rotate(0deg); } }
+        @keyframes rocketFly { 0% { transform: translateY(0) scale(1); } 20% { transform: translateY(20px) scale(0.9); } 100% { transform: translateY(-120vh) scale(1.2); opacity: 0; } }
 
+        /* --- BOTTOM NAV --- */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-h);
-            background: var(--bg-glass); backdrop-filter: blur(20px);
+            background: var(--bg-glass); backdrop-filter: var(--glass-blur);
             border-top: 1px solid var(--border); display: flex; 
             justify-content: space-evenly; align-items: center; z-index: 1900;
         }
-        .nav-item {
-            display: flex; flex-direction: column; align-items: center; gap: 5px;
-            color: var(--text-muted); cursor: pointer; width: 60px;
-        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-muted); cursor: pointer; width: 60px; }
         .nav-item i { font-size: 20px; transition: 0.2s; }
         .nav-item span { font-size: 10px; font-weight: 600; }
         .nav-item.active { color: var(--primary); }
         .nav-item.active i { transform: translateY(-3px); }
 
-        .modal { position: fixed; bottom: -100%; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2100; display: flex; align-items: flex-end; transition: 0.3s; }
-        .modal.active { bottom: 0; }
-        .modal-box { background: var(--bg-card); width: 100%; padding: 30px 24px; border-radius: 25px 25px 0 0; border-top: 1px solid var(--border); }
-        .toggle { width: 45px; height: 26px; background: #e2e8f0; border-radius: 50px; position: relative; cursor: pointer; }
-        .toggle::after { content:''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .toggle.active { background: var(--primary); }
-        .toggle.active::after { left: 22px; }
+        /* --- MODAL SETTINGS (UPDATED SMOOTH ANIMATION) --- */
+        .modal { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0); /* Transparan awal */
+            z-index: 2100; display: flex; align-items: flex-end; 
+            pointer-events: none; /* Klik tembus saat tutup */
+            transition: background 0.3s ease; 
+        }
+        .modal.active { 
+            background: rgba(0,0,0,0.6); 
+            pointer-events: auto; /* Aktifkan klik */
+        }
+        
+        .modal-box { 
+            background: var(--bg-card); width: 100%; padding: 30px 24px; 
+            border-radius: 25px 25px 0 0; border-top: 1px solid var(--border); 
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1); max-height: 85vh; overflow-y: auto; 
+            
+            /* Kunci Animasi Smooth */
+            transform: translateY(100%); 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .modal.active .modal-box { 
+            transform: translateY(0); 
+        }
+
+        .set-group { margin-bottom: 25px; }
+        .set-title { font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Modern Buttons */
+        .btn-opt { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-body); color: var(--text-main); font-weight: 600; font-size: 12px; cursor: pointer; transition: 0.2s; }
+        .btn-opt.active { background: color-mix(in srgb, var(--primary) 10%, transparent); border-color: var(--primary); color: var(--primary); }
+        
+        /* Color Picker */
+        .color-grid { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
+        .color-item { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; transition: 0.2s; position: relative; }
+        .color-item.active { transform: scale(1.15); border-color: var(--text-main); }
+        .color-item::after { content:'\f00c'; font-family:'Font Awesome 6 Free'; font-weight:900; color:white; font-size:14px; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%) scale(0); transition:0.2s; }
+        .color-item.active::after { transform:translate(-50%, -50%) scale(1); }
+
+        /* Modern Toggle */
+        .toggle-switch { width: 46px; height: 26px; background: var(--border); border-radius: 50px; position: relative; cursor: pointer; transition: 0.3s; }
+        .toggle-switch::after { content:''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .toggle-switch.active { background: var(--primary); }
+        .toggle-switch.active::after { left: 23px; }
 
         .footer { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 40px; margin-bottom: 20px; }
     </style>
@@ -229,7 +253,7 @@
 <body>
 
     <header>
-        <div class="logo">MODORA</div>
+        <div class="logo" onclick="window.location.reload()">MODORA</div>
         <div class="search-wrap">
             <input type="text" id="search" class="search-input" placeholder="Search..." onkeyup="doSearch()">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -238,107 +262,130 @@
     </header>
 
     <div id="mainView">
-        
         <div id="section-recom">
             <div class="section-head"><i class="fa-solid fa-star"></i> Recommendation</div>
-            <div class="recom-wrap">
-                <div class="recom-scroll" id="recomContainer"></div>
-            </div>
+            <div class="recom-wrap"><div class="recom-scroll" id="recomContainer"></div></div>
         </div>
-
         <div id="section-apps">
             <div class="section-head"><i class="fa-brands fa-android"></i> Apps</div>
-            <div class="list-container" id="appsContainer"></div>
-            <div class="btn-loadmore" id="btnMoreApps" onclick="loadMoreApps()">
-                Tampilkan Lebih Banyak <i class="fa-solid fa-chevron-down"></i>
-            </div>
+            <div class="list-container view-list" id="appsContainer"></div>
+            <div class="btn-loadmore" id="btnMoreApps" onclick="loadMoreApps()">Tampilkan Lebih Banyak <i class="fa-solid fa-chevron-down"></i></div>
         </div>
-
         <div id="section-games">
             <div class="section-head"><i class="fa-solid fa-gamepad"></i> Games</div>
-            <div class="list-container" id="gamesContainer"></div>
-            <div class="btn-loadmore" id="btnMoreGames" onclick="loadMoreGames()">
-                Tampilkan Lebih Banyak <i class="fa-solid fa-chevron-down"></i>
-            </div>
+            <div class="list-container view-list" id="gamesContainer"></div>
+            <div class="btn-loadmore" id="btnMoreGames" onclick="loadMoreGames()">Tampilkan Lebih Banyak <i class="fa-solid fa-chevron-down"></i></div>
         </div>
-
-        <div class="footer">© <span id="year"></span> MODORA</div>
+        <div class="footer">© <span id="year"></span> MODORA | All Rights Reserved</div>
     </div>
 
     <div class="rocket-wrap" id="rocket">
-        <div class="rocket-btn" onclick="launch()"><i class="fa-solid fa-rocket"></i></div>
+        <div class="rocket-btn" id="rocketBtn" onclick="launchSequence()"><i class="fa-solid fa-rocket"></i></div>
     </div>
 
     <div class="modal" id="modalSet" onclick="if(event.target === this) toggleSet()">
         <div class="modal-box">
-            <h3 style="margin-bottom:20px;">Pengaturan</h3>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-weight:600;">
-                <span>Mode Gelap</span>
-                <div class="toggle" id="themeToggle" onclick="switchTheme()"></div>
+            <div style="text-align:center; margin-bottom:25px;">
+                <div style="width:40px; height:4px; background:var(--border); border-radius:10px; margin:0 auto 15px auto;"></div>
+                <h3 style="font-size:18px;">Pengaturan</h3>
             </div>
-            <div style="font-weight:600; margin-bottom:10px;">Gaya Font</div>
-            <div style="display:flex; gap:10px;">
-                <button onclick="chFont('Plus Jakarta Sans')" style="flex:1; padding:12px; border-radius:12px; border:1px solid var(--border); background:var(--bg-body); color:var(--text-main); font-weight:600;">Modern</button>
-                <button onclick="chFont('sans-serif')" style="flex:1; padding:12px; border-radius:12px; border:1px solid var(--border); background:var(--bg-body); color:var(--text-main); font-weight:600;">System</button>
+            
+            <div class="set-group">
+                <div class="set-title">Tema Warna</div>
+                <div class="color-grid">
+                    <div class="color-item" style="background:#2563eb;" onclick="setThemeColor('#2563eb', '#4f46e5', this)" data-color="#2563eb"></div>
+                    <div class="color-item" style="background:#ef4444;" onclick="setThemeColor('#ef4444', '#b91c1c', this)" data-color="#ef4444"></div>
+                    <div class="color-item" style="background:#10b981;" onclick="setThemeColor('#10b981', '#059669', this)" data-color="#10b981"></div>
+                    <div class="color-item" style="background:#8b5cf6;" onclick="setThemeColor('#8b5cf6', '#7c3aed', this)" data-color="#8b5cf6"></div>
+                    <div class="color-item" style="background:#f59e0b;" onclick="setThemeColor('#f59e0b', '#d97706', this)" data-color="#f59e0b"></div>
+                </div>
             </div>
-            <button onclick="toggleSet()" style="width:100%; margin-top:25px; padding:14px; background:var(--text-main); color:var(--bg-card); border-radius:14px; font-weight:bold; border:none;">Tutup</button>
+
+            <div class="set-group">
+                <div class="set-title">
+                    <span>Mode Gelap</span>
+                    <div class="toggle-switch" id="themeToggle" onclick="switchTheme()"></div>
+                </div>
+            </div>
+
+            <div class="set-group">
+                <div class="set-title">
+                    <span>Mode Hemat Baterai (No Blur)</span>
+                    <div class="toggle-switch" id="ecoToggle" onclick="toggleEco()"></div>
+                </div>
+            </div>
+
+            <div class="set-group">
+                <div class="set-title">Tampilan</div>
+                <div style="display:flex; gap:10px;">
+                    <button onclick="setViewMode('list')" id="btnViewList" class="btn-opt active"><i class="fa-solid fa-list"></i> List</button>
+                    <button onclick="setViewMode('grid')" id="btnViewGrid" class="btn-opt"><i class="fa-solid fa-border-all"></i> Grid</button>
+                </div>
+            </div>
+
+            <div class="set-group">
+                <div class="set-title">Gaya Font</div>
+                <div style="display:flex; gap:10px;">
+                    <button onclick="chFont('Plus Jakarta Sans')" id="btnFontModern" class="btn-opt active">Modern</button>
+                    <button onclick="chFont('Merriweather')" id="btnFontClassic" class="btn-opt" style="font-family:serif;">Klasik</button>
+                    <button onclick="chFont('JetBrains Mono')" id="btnFontTech" class="btn-opt" style="font-family:monospace;">Tech</button>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:30px;">
+                <button onclick="resetSettings()" style="flex:1; padding:14px; background:var(--bg-body); color:var(--text-muted); border-radius:14px; font-weight:bold; border:1px solid var(--border); cursor:pointer;">Reset</button>
+                <button onclick="toggleSet()" style="flex:2; padding:14px; background:var(--text-main); color:var(--bg-card); border-radius:14px; font-weight:bold; border:none; cursor:pointer;">Tutup</button>
+            </div>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="nav('all', this)">
-            <i class="fa-solid fa-house"></i><span>Home</span>
-        </div>
-        <div class="nav-item" onclick="nav('app', this)">
-            <i class="fa-brands fa-android"></i><span>Apps</span>
-        </div>
-        <div class="nav-item" onclick="nav('game', this)">
-            <i class="fa-solid fa-gamepad"></i><span>Games</span>
-        </div>
-        <div class="nav-item" onclick="toggleSet()">
-            <i class="fa-solid fa-gear"></i><span>Setting</span>
-        </div>
+        <div class="nav-item active" onclick="nav('all', this)"><i class="fa-solid fa-house"></i><span>Home</span></div>
+        <div class="nav-item" onclick="nav('app', this)"><i class="fa-brands fa-android"></i><span>Apps</span></div>
+        <div class="nav-item" onclick="nav('game', this)"><i class="fa-solid fa-gamepad"></i><span>Games</span></div>
+        <div class="nav-item" onclick="toggleSet()"><i class="fa-solid fa-gear"></i><span>Setting</span></div>
     </div>
 
     <script>
         document.getElementById('year').innerText = new Date().getFullYear();
 
+        // --- DATABASE ---
         const dbApps = [
-    { name: "CapCut v16.9.0 MOD APK (Pro, Premium Unlocked)", img: "/apps/CapCut%20v16.9.0%20MOD%20APK%20(Pro%2C%20Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/CapCut%20v16.9.0%20MOD%20APK%20(Pro%2C%20Premium%20Unlocked)/", type: "app" },
-    { name: "Video Compressor MOD APK v19.1.0", img: "/apps/Video%20Compressor%20MOD%20APK%20v19.1.0/MODORA-Images.jpg", link: "/apps/Video%20Compressor%20MOD%20APK%20v19.1.0", type: "app" },
-    { name: "CamScanner v7.12.0.2602050000 MOD APK [Premium Unlocked]", img: "/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "PhotoRoom v2026.07.02 MOD APK [Pro Unlocked, Premium]", img: "/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D/MODORA-Images.jpg", link: "/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D", type: "app" },
-    { name: "Picsart Premium v29.3.5 MOD APK [Unlocked Premium]", img: "/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D/MODORA-Images.jpg", link: "/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D", type: "app" },
-    { name: "VivaVideo Pro v9.33.5 MOD APK [Premium/VIP Unlocked]", img: "/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D", type: "app" },
-    { name: "Bstation  v3.63.0 MOD APK (Premium Unlocked)", img: "/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
-    { name: "Loklok v3.22.0 MOD APK (VIP Unlocked, No ADS)", img: "/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)/MODORA-Images.jpg", link: "/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)", type: "app" },
-    { name: "CapCut MOD APK v16.6.0 (Premium Unlocked)", img: "/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)", type: "app" },
-    { name: "DramaBox v5.0.2 Mod APK (Premium Unlocked)", img: "/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)", type: "app" },
-    { name: "Melolo v5.1.0 MOD APK (Premium Unlocked)", img: "/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
-    { name: "Alight Motion Pro v5.0.273.1028414 MOD APK [Full Pro] [Premium Unlocked]", img: "/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "Moises v2.113.0 MOD APK [Premium Unlocked]", img: "/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "Pixelcut v0.9.40 MOD APK [Premium Unlocked]", img: "/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
-    { name: "InShot Pro APK v2.193.1526 [MOD, PRO Unlocked]", img: "/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D", type: "app" },
-    { name: "TeraBox v4.13.0 Mod APK (Premium Unlocked)", img: "/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)", type: "app" }
+            { name: "CapCut v16.9.0 MOD APK (Pro, Premium Unlocked)", img: "/apps/CapCut%20v16.9.0%20MOD%20APK%20(Pro%2C%20Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/CapCut%20v16.9.0%20MOD%20APK%20(Pro%2C%20Premium%20Unlocked)/", type: "app" },
+            { name: "Video Compressor MOD APK v19.1.0", img: "/apps/Video%20Compressor%20MOD%20APK%20v19.1.0/MODORA-Images.jpg", link: "/apps/Video%20Compressor%20MOD%20APK%20v19.1.0", type: "app" },
+            { name: "CamScanner v7.12.0.2602050000 MOD APK [Premium Unlocked]", img: "/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/CamScanner%20v7.12.0.2602050000%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
+            { name: "PhotoRoom v2026.07.02 MOD APK [Pro Unlocked, Premium]", img: "/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D/MODORA-Images.jpg", link: "/apps/PhotoRoom%20v2026.07.02%20MOD%20APK%20%5BPro%20Unlocked%2C%20Premium%5D", type: "app" },
+            { name: "Picsart Premium v29.3.5 MOD APK [Unlocked Premium]", img: "/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D/MODORA-Images.jpg", link: "/apps/Picsart%20Premium%20v29.3.5%20MOD%20APK%20%5BUnlocked%20Premium%5D", type: "app" },
+            { name: "VivaVideo Pro v9.33.5 MOD APK [Premium/VIP Unlocked]", img: "/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/VivaVideo%20Pro%20v9.33.5%20MOD%20APK%20%5BPremium%2FVIP%20Unlocked%5D", type: "app" },
+            { name: "Bstation  v3.63.0 MOD APK (Premium Unlocked)", img: "/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/Bstation%20%20v3.63.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
+            { name: "Loklok v3.22.0 MOD APK (VIP Unlocked, No ADS)", img: "/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)/MODORA-Images.jpg", link: "/apps/Loklok%20v3.22.0%20MOD%20APK%20(VIP%20Unlocked%2C%20No%20ADS)", type: "app" },
+            { name: "CapCut MOD APK v16.6.0 (Premium Unlocked)", img: "/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/CapCut%20MOD%20APK%20v16.6.0%20(Premium%20Unlocked)", type: "app" },
+            { name: "DramaBox v5.0.2 Mod APK (Premium Unlocked)", img: "/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/DramaBox%20v5.0.2%20Mod%20APK%20(Premium%20Unlocked)", type: "app" },
+            { name: "Melolo v5.1.0 MOD APK (Premium Unlocked)", img: "/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/Melolo%20v5.1.0%20MOD%20APK%20(Premium%20Unlocked)", type: "app" },
+            { name: "Alight Motion Pro v5.0.273.1028414 MOD APK [Full Pro] [Premium Unlocked]", img: "/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Alight%20Motion%20Pro%20v5.0.273.1028414%20MOD%20APK%20%5BFull%20Pro%5D%20%5BPremium%20Unlocked%5D", type: "app" },
+            { name: "Moises v2.113.0 MOD APK [Premium Unlocked]", img: "/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Moises%20v2.113.0%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
+            { name: "Pixelcut v0.9.40 MOD APK [Premium Unlocked]", img: "/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/Pixelcut%20v0.9.40%20MOD%20APK%20%5BPremium%20Unlocked%5D", type: "app" },
+            { name: "InShot Pro APK v2.193.1526 [MOD, PRO Unlocked]", img: "/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D/MODORA-Images.jpg", link: "/apps/InShot%20Pro%20APK%20v2.193.1526%20%5BMOD%2C%20PRO%20Unlocked%5D", type: "app" },
+            { name: "TeraBox v4.13.0 Mod APK (Premium Unlocked)", img: "/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)/MODORA-Images.jpg", link: "/apps/TeraBox%20v4.13.0%20Mod%20APK%20(Premium%20Unlocked)", type: "app" }
         ];
 
         const dbGames = [
-    { name: "Plants vs Zombies 3: Evolved (MOD, Unlimited Suns) v26.3.6", img: "/games/Plants%20vs%20Zombies%203%3A%20Evolved%20(MOD%2C%20Unlimited%20Suns)%20v26.3.6/MODORA-Images.jpg", link: "/games/Plants%20vs%20Zombies%203%3A%20Evolved%20(MOD%2C%20Unlimited%20Suns)%20v26.3.6/", type: "game" },
-    { name: "Grand Theft Auto: San Andreas v2.11.311 MOD APK [Unlimited Money]", img: "/games/Grand%20Theft%20Auto%3A%20San%20Andreas%20v2.11.311%20MOD%20APK%20%5BUnlimited%20Money%5D/MODORA-Images.jpg", link: "/games/Grand%20Theft%20Auto%3A%20San%20Andreas%20v2.11.311%20MOD%20APK%20%5BUnlimited%20Money%5D/", type: "game" },
-    { name: "Dark War Survival v1.250.634 MOD APK [MOD Menu, Unlimited Money]", img: "/games/Dark%20War%20Survival%20v1.250.634%20MOD%20APK%20%5BMOD%20Menu%2C%20Unlimited%20Money%5D/MODORA-Images.jpg", link: "/games/Dark%20War%20Survival%20v1.250.634%20MOD%20APK%20%5BMOD%20Menu%2C%20Unlimited%20Money%5D/", type: "game" },
-    { name: "Grand Theft Auto V v0.8.1 MOD APK [MOD Unlocked, Unlimited Money]", img: "/games/Grand%20Theft%20Auto%20V%20v0.8.1%20MOD%20APK%20%5BMOD%20Unlocked%2C%20Unlimited%20Money%5D/MODORA-Images.jpg", link: "/games/Grand%20Theft%20Auto%20V%20v0.8.1%20MOD%20APK%20%5BMOD%20Unlocked%2C%20Unlimited%20Money%5D/", type: "game" },
-    { name: "Angry Birds 2 v7.1.0 MOD APK [Unlimited Money/Gems]", img: "/games/Angry%20Birds%202%20v7.1.0%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/MODORA-Images.jpg", link: "/games/Angry%20Birds%202%20v7.1.0%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/", type: "game" },
-    { name: "My Talking Tom Friends v26.1.1.18074 MOD APK [Free Purchases]", img: "/games/My%20Talking%20Tom%20Friends%20v26.1.1.18074%20MOD%20APK%20%5BFree%20Purchases%5D/MODORA-Images.jpg", link: "/games/My%20Talking%20Tom%20Friends%20v26.1.1.18074%20MOD%20APK%20%5BFree%20Purchases%5D/", type: "game" },
-    { name: "Hungry Shark World v7.5.1 MOD APK [Unlimited Money/Gems]", img: "/games/Hungry%20Shark%20World%20v7.5.1%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/MODORA-Images.jpg", link: "/games/Hungry%20Shark%20World%20v7.5.1%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/", type: "game" },
-    { name: "Zombie Tsunami v4.6.9 MOD APK (Money, Unlocked all, Max Level)", img: "/games/Zombie%20Tsunami%20v4.6.9%20MOD%20APK%20(Money%2C%20Unlocked%20all%2C%20Max%20Level)/MODORA-Images.jpg", link: "/games/Zombie%20Tsunami%20v4.6.9%20MOD%20APK%20(Money%2C%20Unlocked%20all%2C%20Max%20Level)/", type: "game" },
-    { name: "Galaxy Attack: Alien Shooter v70.7 MOD APK (Unlimited Money/VIP Unlocked)", img: "/games/Galaxy%20Attack%3A%20Alien%20Shooter%20v70.7%20MOD%20APK%20(Unlimited%20Money%2FVIP%20Unlocked)/MODORA-Images.jpg", link: "/games/Galaxy%20Attack%3A%20Alien%20Shooter%20v70.7%20MOD%20APK%20(Unlimited%20Money%2FVIP%20Unlocked)/", type: "game" },
-    { name: "Sonic Dash (MOD, Unlimited Money) v9.4.0", img: "/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0/MODORA-Images.jpg", link: "/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0", type: "game" },
-    { name: "Subway Surfers (MOD, Unlimited Coins/Keys) v3.58.4", img: "/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4/MODORA-Images.jpg", link: "/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4", type: "game" },
-    { name: "Zooba v6.3.4 MOD APK (Show Enemies, Always Shot, DroneView)", img: "/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)/MODORA-Images.jpg", link: "/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)", type: "game" },
-    { name: "Mad Skills Motocross 2 (MOD, Rockets/Unlocked) v2.55.5014", img: "/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014/MODORA-Images.jpg", link: "/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014", type: "game" },
-    { name: "Mad Skills Motocross 3 (MOD, Unlimited Money) v4.10.0", img: "/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0/MODORA-Images.jpg", link: "/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0", type: "game" },            
-    { name: "Badminton League (MOD, Unlimited Coins) v3.71.3957", img: "/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957/MODORA-Images.jpg", link: "/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957", type: "game" },
-    { name: "Football League 2026 (MOD, Unlimited Coins) v0.1.79", img: "/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79/MODORA-Images.jpg", link: "/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79", type: "game" }
+            { name: "Plants vs Zombies 3: Evolved (MOD, Unlimited Suns) v26.3.6", img: "/games/Plants%20vs%20Zombies%203%3A%20Evolved%20(MOD%2C%20Unlimited%20Suns)%20v26.3.6/MODORA-Images.jpg", link: "/games/Plants%20vs%20Zombies%203%3A%20Evolved%20(MOD%2C%20Unlimited%20Suns)%20v26.3.6/", type: "game" },
+            { name: "Grand Theft Auto: San Andreas v2.11.311 MOD APK [Unlimited Money]", img: "/games/Grand%20Theft%20Auto%3A%20San%20Andreas%20v2.11.311%20MOD%20APK%20%5BUnlimited%20Money%5D/MODORA-Images.jpg", link: "/games/Grand%20Theft%20Auto%3A%20San%20Andreas%20v2.11.311%20MOD%20APK%20%5BUnlimited%20Money%5D/", type: "game" },
+            { name: "Dark War Survival v1.250.634 MOD APK [MOD Menu, Unlimited Money]", img: "/games/Dark%20War%20Survival%20v1.250.634%20MOD%20APK%20%5BMOD%20Menu%2C%20Unlimited%20Money%5D/MODORA-Images.jpg", link: "/games/Dark%20War%20Survival%20v1.250.634%20MOD%20APK%20%5BMOD%20Menu%2C%20Unlimited%20Money%5D/", type: "game" },
+            { name: "Grand Theft Auto V v0.8.1 MOD APK [MOD Unlocked, Unlimited Money]", img: "/games/Grand%20Theft%20Auto%20V%20v0.8.1%20MOD%20APK%20%5BMOD%20Unlocked%2C%20Unlimited%20Money%5D/MODORA-Images.jpg", link: "/games/Grand%20Theft%20Auto%20V%20v0.8.1%20MOD%20APK%20%5BMOD%20Unlocked%2C%20Unlimited%20Money%5D/", type: "game" },
+            { name: "Angry Birds 2 v7.1.0 MOD APK [Unlimited Money/Gems]", img: "/games/Angry%20Birds%202%20v7.1.0%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/MODORA-Images.jpg", link: "/games/Angry%20Birds%202%20v7.1.0%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/", type: "game" },
+            { name: "My Talking Tom Friends v26.1.1.18074 MOD APK [Free Purchases]", img: "/games/My%20Talking%20Tom%20Friends%20v26.1.1.18074%20MOD%20APK%20%5BFree%20Purchases%5D/MODORA-Images.jpg", link: "/games/My%20Talking%20Tom%20Friends%20v26.1.1.18074%20MOD%20APK%20%5BFree%20Purchases%5D/", type: "game" },
+            { name: "Hungry Shark World v7.5.1 MOD APK [Unlimited Money/Gems]", img: "/games/Hungry%20Shark%20World%20v7.5.1%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/MODORA-Images.jpg", link: "/games/Hungry%20Shark%20World%20v7.5.1%20MOD%20APK%20%5BUnlimited%20Money%2FGems%5D/", type: "game" },
+            { name: "Zombie Tsunami v4.6.9 MOD APK (Money, Unlocked all, Max Level)", img: "/games/Zombie%20Tsunami%20v4.6.9%20MOD%20APK%20(Money%2C%20Unlocked%20all%2C%20Max%20Level)/MODORA-Images.jpg", link: "/games/Zombie%20Tsunami%20v4.6.9%20MOD%20APK%20(Money%2C%20Unlocked%20all%2C%20Max%20Level)/", type: "game" },
+            { name: "Galaxy Attack: Alien Shooter v70.7 MOD APK (Unlimited Money/VIP Unlocked)", img: "/games/Galaxy%20Attack%3A%20Alien%20Shooter%20v70.7%20MOD%20APK%20(Unlimited%20Money%2FVIP%20Unlocked)/MODORA-Images.jpg", link: "/games/Galaxy%20Attack%3A%20Alien%20Shooter%20v70.7%20MOD%20APK%20(Unlimited%20Money%2FVIP%20Unlocked)/", type: "game" },
+            { name: "Sonic Dash (MOD, Unlimited Money) v9.4.0", img: "/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0/MODORA-Images.jpg", link: "/games/Sonic%20Dash%20(MOD%2C%20Unlimited%20Money)%20v9.4.0", type: "game" },
+            { name: "Subway Surfers (MOD, Unlimited Coins/Keys) v3.58.4", img: "/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4/MODORA-Images.jpg", link: "/games/Subway%20Surfers%20(MOD%2C%20Unlimited%20Coins%2FKeys)%20v3.58.4", type: "game" },
+            { name: "Zooba v6.3.4 MOD APK (Show Enemies, Always Shot, DroneView)", img: "/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)/MODORA-Images.jpg", link: "/games/Zooba%20v6.3.4%20MOD%20APK%20(Show%20Enemies%2C%20Always%20Shot%2C%20DroneView)", type: "game" },
+            { name: "Mad Skills Motocross 2 (MOD, Rockets/Unlocked) v2.55.5014", img: "/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014/MODORA-Images.jpg", link: "/apps/Mad%20Skills%20Motocross%202%20(MOD%2C%20Rockets%2FUnlocked)%20v2.55.5014", type: "game" },
+            { name: "Mad Skills Motocross 3 (MOD, Unlimited Money) v4.10.0", img: "/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0/MODORA-Images.jpg", link: "/apps/Mad%20Skills%20Motocross%203%20(MOD%2C%20Unlimited%20Money)%20v4.10.0", type: "game" },            
+            { name: "Badminton League (MOD, Unlimited Coins) v3.71.3957", img: "/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957/MODORA-Images.jpg", link: "/games/Badminton%20League%20(MOD%2C%20Unlimited%20Coins)%20v3.71.3957", type: "game" },
+            { name: "Football League 2026 (MOD, Unlimited Coins) v0.1.79", img: "/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79/MODORA-Images.jpg", link: "/games/Football%20League%202026%20(MOD%2C%20Unlimited%20Coins)%20v0.1.79", type: "game" }
         ];
 
         let showAppsCount = 10;
@@ -350,167 +397,175 @@
             const shuffled = allReal.sort(() => 0.5 - Math.random()).slice(0, 5);
             let html = '';
             shuffled.forEach(item => {
-                html += `
-                <div class="trend-card" onclick="openLink('${item.link}')">
-                    <span class="trend-badge">RECOMMENDED</span>
-                    <div class="trend-name">${item.name}</div>
-                    <div class="trend-act">Install Now <i class="fa-solid fa-arrow-right"></i></div>
-                    <img src="${item.img}" class="trend-bg">
-                </div>`;
+                html += `<div class="trend-card" onclick="openLink('${item.link}')"><span class="trend-badge">RECOMMENDED</span><div class="trend-name">${item.name}</div><div class="trend-act">Install Now <i class="fa-solid fa-arrow-right"></i></div><img src="${item.img}" class="trend-bg"></div>`;
             });
             container.innerHTML = html;
         }
 
-        function renderAppsList() {
-            const container = document.getElementById('appsContainer');
-            const btn = document.getElementById('btnMoreApps');
-            const dataToShow = dbApps.slice(0, showAppsCount);
+        function createCardHtml(item) {
+            return `<div class="clean-card" onclick="openLink('${item.link}')"><div class="icon-wrap"><img src="${item.img}" class="clean-icon"><div class="mod-label">MOD</div></div><div class="clean-info"><div class="clean-name">${item.name}</div></div><button class="btn-unduh">UNDUH</button></div>`;
+        }
+
+        function renderLists() {
+            const cApps = document.getElementById('appsContainer');
+            const cGames = document.getElementById('gamesContainer');
+            let hApps = ''; dbApps.slice(0, showAppsCount).forEach(item => hApps += createCardHtml(item));
+            cApps.innerHTML = hApps;
+            document.getElementById('btnMoreApps').classList.toggle('hidden', showAppsCount >= dbApps.length);
             
-            let html = '';
-            dataToShow.forEach(item => {
-                html += `
-                <div class="clean-card" onclick="openLink('${item.link}')">
-                    <div class="icon-wrap">
-                        <img src="${item.img}" class="clean-icon">
-                        <div class="mod-label">MOD</div>
-                    </div>
-                    <div class="clean-info">
-                        <div class="clean-name">${item.name}</div>
-                    </div>
-                    <button class="btn-unduh">UNDUH</button>
-                </div>`;
-            });
-            container.innerHTML = html;
-
-            if(showAppsCount >= dbApps.length) btn.classList.add('hidden');
-            else btn.classList.remove('hidden');
+            let hGames = ''; dbGames.slice(0, showGamesCount).forEach(item => hGames += createCardHtml(item));
+            cGames.innerHTML = hGames;
+            document.getElementById('btnMoreGames').classList.toggle('hidden', showGamesCount >= dbGames.length);
         }
 
-        function renderGamesList() {
-            const container = document.getElementById('gamesContainer');
-            const btn = document.getElementById('btnMoreGames');
-            const dataToShow = dbGames.slice(0, showGamesCount);
-            
-            let html = '';
-            dataToShow.forEach(item => {
-                html += `
-                <div class="clean-card" onclick="openLink('${item.link}')">
-                    <div class="icon-wrap">
-                        <img src="${item.img}" class="clean-icon">
-                        <div class="mod-label">MOD</div>
-                    </div>
-                    <div class="clean-info">
-                        <div class="clean-name">${item.name}</div>
-                    </div>
-                    <button class="btn-unduh">UNDUH</button>
-                </div>`;
-            });
-            container.innerHTML = html;
-
-            if(showGamesCount >= dbGames.length) btn.classList.add('hidden');
-            else btn.classList.remove('hidden');
-        }
-
-        function loadMoreApps() { showAppsCount += 10; renderAppsList(); }
-        function loadMoreGames() { showGamesCount += 10; renderGamesList(); }
-
-        function openLink(url) {
-            if(url && url !== '#') window.location.href = url;
-            else alert('Link download sedang diproses sistem!');
-        }
+        function loadMoreApps() { showAppsCount += 10; renderLists(); }
+        function loadMoreGames() { showGamesCount += 10; renderLists(); }
+        function openLink(url) { if(url && url !== '#') window.location.href = url; else alert('Link sedang diproses!'); }
 
         function doSearch() {
             const val = document.getElementById('search').value.toLowerCase();
-            
-            // Element Sections
             const secRecom = document.getElementById('section-recom');
             const secApps = document.getElementById('section-apps');
             const secGames = document.getElementById('section-games');
 
-            if(val === '') {
-                // Restore View based on active tab
-                const navItems = document.querySelectorAll('.nav-item');
-                let activeType = 'all'; // default
-                
-                if(navItems[1].classList.contains('active')) activeType = 'app';
-                else if(navItems[2].classList.contains('active')) activeType = 'game';
-                
-                if(activeType === 'all') {
-                    secRecom.style.display = 'block';
-                    secApps.style.display = 'block';
-                    secGames.style.display = 'block';
-                } else if(activeType === 'app') {
-                    secRecom.style.display = 'none';
-                    secApps.style.display = 'block';
-                    secGames.style.display = 'none';
-                } else if(activeType === 'game') {
-                    secRecom.style.display = 'none';
-                    secApps.style.display = 'none';
-                    secGames.style.display = 'block';
-                }
-
-                showAppsCount = 10; showGamesCount = 10;
-                renderAppsList(); renderGamesList();
-                return;
-            }
+            if(val === '') { restoreView(); return; }
+            secRecom.style.display = 'none'; secApps.style.display = 'block'; secGames.style.display = 'block';
             
-            // SEARCH MODE: Hide Recom, Show Both Result Containers
-            secRecom.style.display = 'none';
-            secApps.style.display = 'block';
-            secGames.style.display = 'block';
-            
-            const fApps = dbApps.filter(i => i.name.toLowerCase().includes(val));
-            let hApp = '';
-            fApps.forEach(item => {
-                hApp += `<div class="clean-card" onclick="openLink('${item.link}')"><div class="icon-wrap"><img src="${item.img}" class="clean-icon"><div class="mod-label">MOD</div></div><div class="clean-info"><div class="clean-name">${item.name}</div></div><button class="btn-unduh">UNDUH</button></div>`;
-            });
-            document.getElementById('appsContainer').innerHTML = hApp || '<div style="text-align:center; color:#999; padding:15px; font-size:13px;">Tidak ditemukan</div>';
+            let fApps = dbApps.filter(i => i.name.toLowerCase().includes(val));
+            if(fApps.length > 0) fApps = [fApps[0]];
+            let hApp = ''; fApps.forEach(item => hApp += createCardHtml(item));
+            document.getElementById('appsContainer').innerHTML = hApp || '<div style="text-align:center;color:var(--text-muted);padding:15px;font-size:13px;">Tidak ditemukan</div>';
             document.getElementById('btnMoreApps').classList.add('hidden');
 
-            const fGames = dbGames.filter(i => i.name.toLowerCase().includes(val));
-            let hGame = '';
-            fGames.forEach(item => {
-                hGame += `<div class="clean-card" onclick="openLink('${item.link}')"><div class="icon-wrap"><img src="${item.img}" class="clean-icon"><div class="mod-label">MOD</div></div><div class="clean-info"><div class="clean-name">${item.name}</div></div><button class="btn-unduh">UNDUH</button></div>`;
-            });
-            document.getElementById('gamesContainer').innerHTML = hGame || '<div style="text-align:center; color:#999; padding:15px; font-size:13px;">Tidak ditemukan</div>';
+            let fGames = dbGames.filter(i => i.name.toLowerCase().includes(val));
+            if(fGames.length > 0) fGames = [fGames[0]];
+            let hGame = ''; fGames.forEach(item => hGame += createCardHtml(item));
+            document.getElementById('gamesContainer').innerHTML = hGame || '<div style="text-align:center;color:var(--text-muted);padding:15px;font-size:13px;">Tidak ditemukan</div>';
             document.getElementById('btnMoreGames').classList.add('hidden');
+        }
+
+        function restoreView() {
+            const navItems = document.querySelectorAll('.nav-item');
+            let activeType = 'all';
+            if(navItems[1].classList.contains('active')) activeType = 'app';
+            else if(navItems[2].classList.contains('active')) activeType = 'game';
+            
+            document.getElementById('section-recom').style.display = (activeType === 'all') ? 'block' : 'none';
+            document.getElementById('section-apps').style.display = (activeType === 'game') ? 'none' : 'block';
+            document.getElementById('section-games').style.display = (activeType === 'app') ? 'none' : 'block';
+            showAppsCount=10; showGamesCount=10; renderLists();
         }
 
         function nav(type, el) {
             document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
             el.classList.add('active');
-            const secRecom = document.getElementById('section-recom');
-            const secApps = document.getElementById('section-apps');
-            const secGames = document.getElementById('section-games');
-
             document.getElementById('search').value = '';
-
-            if(type === 'all') {
-                secRecom.style.display = 'block'; secApps.style.display = 'block'; secGames.style.display = 'block';
-            } else if(type === 'app') {
-                secRecom.style.display = 'none'; secApps.style.display = 'block'; secGames.style.display = 'none';
-            } else if(type === 'game') {
-                secRecom.style.display = 'none'; secApps.style.display = 'none'; secGames.style.display = 'block';
-            }
-            window.scrollTo(0,0);
+            restoreView(); window.scrollTo(0,0);
         }
 
+        // --- SETTINGS LOGIC ---
         function toggleSet() { document.getElementById('modalSet').classList.toggle('active'); }
-        function switchTheme() { document.body.classList.toggle('dark-mode'); document.getElementById('themeToggle').classList.toggle('active'); }
-        function chFont(font) { document.documentElement.style.setProperty('--font-main', font); }
 
-        const rocket = document.getElementById('rocket');
-        const rBtn = document.querySelector('.rocket-btn');
-        window.onscroll = () => { window.scrollY > 200 ? rocket.classList.add('show') : rocket.classList.remove('show'); }
-        function launch() {
-            rBtn.classList.add('launching');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-            setTimeout(() => rBtn.classList.remove('launching'), 800);
+        function loadSettings() {
+            // Theme
+            if(localStorage.getItem('modora_theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeToggle').classList.add('active');
+            }
+            // Eco Mode
+            if(localStorage.getItem('modora_eco') === 'true') {
+                document.body.classList.add('eco-mode');
+                document.getElementById('ecoToggle').classList.add('active');
+            }
+            // Color
+            const savedColor = localStorage.getItem('modora_color');
+            const savedSec = localStorage.getItem('modora_color_sec');
+            if(savedColor) {
+                document.documentElement.style.setProperty('--primary', savedColor);
+                document.documentElement.style.setProperty('--secondary', savedSec);
+                updateColorActive(savedColor);
+            } else {
+                updateColorActive('#2563eb'); // default
+            }
+            // View & Font
+            setViewMode(localStorage.getItem('modora_view') || 'list');
+            chFont(localStorage.getItem('modora_font') || 'Plus Jakarta Sans');
         }
 
-        renderRecom();
-        renderAppsList();
-        renderGamesList();
+        function switchTheme() {
+            document.body.classList.toggle('dark-mode');
+            document.getElementById('themeToggle').classList.toggle('active');
+            localStorage.setItem('modora_theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+
+        function toggleEco() {
+            document.body.classList.toggle('eco-mode');
+            document.getElementById('ecoToggle').classList.toggle('active');
+            localStorage.setItem('modora_eco', document.body.classList.contains('eco-mode') ? 'true' : 'false');
+        }
+
+        function setThemeColor(prim, sec, el) {
+            document.documentElement.style.setProperty('--primary', prim);
+            document.documentElement.style.setProperty('--secondary', sec);
+            localStorage.setItem('modora_color', prim);
+            localStorage.setItem('modora_color_sec', sec);
+            updateColorActive(prim);
+        }
+
+        function updateColorActive(color) {
+            document.querySelectorAll('.color-item').forEach(c => {
+                c.classList.remove('active');
+                if(c.getAttribute('data-color') === color) c.classList.add('active');
+            });
+        }
+
+        function setViewMode(mode) {
+            const cApps = document.getElementById('appsContainer');
+            const cGames = document.getElementById('gamesContainer');
+            cApps.className = `list-container view-${mode}`;
+            cGames.className = `list-container view-${mode}`;
+            document.getElementById('btnViewList').classList.toggle('active', mode === 'list');
+            document.getElementById('btnViewGrid').classList.toggle('active', mode === 'grid');
+            localStorage.setItem('modora_view', mode);
+        }
+
+        function chFont(fontName) {
+            document.documentElement.style.setProperty('--font-main', fontName);
+            localStorage.setItem('modora_font', fontName);
+            document.querySelectorAll('.btn-opt[onclick*="chFont"]').forEach(b => b.classList.remove('active'));
+            if(fontName.includes('Jakarta')) document.getElementById('btnFontModern').classList.add('active');
+            else if(fontName.includes('Merriweather')) document.getElementById('btnFontClassic').classList.add('active');
+            else document.getElementById('btnFontTech').classList.add('active');
+        }
+
+        function resetSettings() {
+            localStorage.clear();
+            window.location.reload();
+        }
+
+        // --- ROCKET ANIMATION ---
+        const rocketWrap = document.getElementById('rocket');
+        const rocketBtn = document.getElementById('rocketBtn');
+        let isLaunching = false;
+
+        window.onscroll = () => { if(!isLaunching) window.scrollY > 200 ? rocketWrap.classList.add('show') : rocketWrap.classList.remove('show'); }
+
+        function launchSequence() {
+            if(isLaunching) return; isLaunching = true;
+            rocketBtn.classList.add('vibrating');
+            setTimeout(() => {
+                rocketBtn.classList.remove('vibrating'); rocketBtn.classList.add('launching');
+                for(let i=0; i<20; i++) {
+                    const s = document.createElement('div'); s.classList.add('smoke-particle');
+                    s.style.setProperty('--tx', `${(Math.random()-0.5)*60}px`); s.style.animationDelay = `${Math.random()*0.2}s`;
+                    rocketBtn.appendChild(s); setTimeout(() => s.remove(), 1000);
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => { rocketBtn.classList.remove('launching'); rocketWrap.classList.remove('show'); isLaunching = false; }, 1500);
+            }, 300);
+        }
+
+        loadSettings(); renderRecom(); renderLists();
 
     </script>
 </body>
