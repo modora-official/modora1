@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nixygaming.my.id/sitemap.xml
-Sitemap: https://nixygaming.my.id/about-sitemap.xml
