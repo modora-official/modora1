@@ -15,6 +15,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <script>
         const savedTheme = localStorage.getItem('modora_theme');
         if(savedTheme === 'light') { 
@@ -69,6 +72,12 @@
             --glass-blur: none;
         }
 
+        /* --- VIEW TRANSITION SMOOTHING (Khusus Layout) --- */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.35s;
+        }
+
         /* --- RESET & LAYOUT --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-main); outline: none; -webkit-tap-highlight-color: transparent; }
         
@@ -79,7 +88,9 @@
             padding-top: calc(var(--header-h) + 15px); 
             padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 20px) + 30px);
         }
-        body.app-ready { transition: background-color 0.4s, color 0.4s; }
+
+        /* Transisi warna CSS yang super ringan */
+        body.app-ready { transition: background-color 0.25s ease, color 0.25s ease; }
 
         .btn-unduh, .btn-loadmore, .nav-item, .logo, .trend-card, .clean-card, .btn-tele, .rocket-btn, .seg-btn, .color-item, .toggle-switch, img {
             -webkit-user-select: none; user-select: none; -webkit-user-drag: none;
@@ -102,12 +113,12 @@
             border-bottom: 1px solid var(--border); z-index: 1000;
             transform: translateZ(0);
         }
-        body.app-ready header { transition: background 0.4s, border 0.4s; }
+        header { transition: background-color 0.25s ease, border-color 0.25s ease; }
 
         .logo { font-size: 24px; font-weight: 800; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; cursor: pointer; }
         
         .search-wrap { flex: 1; margin: 0 15px; position: relative; max-width: 400px; }
-        .search-input { width: 100%; padding: 10px 40px 10px 15px; border-radius: 12px; border: none; background: var(--search-bg); color: var(--text-main); font-size: 14px; transition: 0.3s; font-weight: 500; }
+        .search-input { width: 100%; padding: 10px 40px 10px 15px; border-radius: 12px; border: none; background: var(--search-bg); color: var(--text-main); font-size: 14px; transition: background-color 0.25s ease, box-shadow 0.25s ease; font-weight: 500; }
         .search-input:focus { box-shadow: 0 0 0 2px var(--primary); background: var(--bg-card); }
         .search-input::placeholder { color: var(--text-muted); font-weight: 400; }
         .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; pointer-events: none; }
@@ -142,7 +153,11 @@
 
         /* --- RECOMMENDATION --- */
         .section-head { font-size: 19px; font-weight: 800; margin-bottom: 16px; margin-top: 25px; display: flex; align-items: center; gap: 8px; letter-spacing: -0.3px; }
-        .section-head i { color: #f59e0b; }
+        .section-head ion-icon { font-size: 22px; }
+        .section-head ion-icon.recom-icon { color: #f59e0b; }
+        .section-head ion-icon.apps-icon { color: #10b981; }
+        .section-head ion-icon.games-icon { color: #8b5cf6; }
+        
         .recom-wrap { margin-right: -24px; padding-right: 24px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
         .recom-wrap::-webkit-scrollbar { display: none; }
         .recom-scroll { display: flex; gap: 15px; width: max-content; }
@@ -151,11 +166,11 @@
             width: 300px; height: 165px; border-radius: 24px; background: var(--bg-card);
             border: 1px solid var(--card-border); position: relative; overflow: hidden;
             padding: 22px; display: flex; flex-direction: column; justify-content: center;
-            box-shadow: var(--shadow); cursor: pointer; transition: transform 0.2s;
+            box-shadow: var(--shadow); cursor: pointer; 
+            transition: transform 0.2s, background-color 0.25s ease, border-color 0.25s ease;
         }
-        body.app-ready .trend-card { transition: transform 0.2s, background 0.4s; }
         .trend-card:active { transform: scale(0.96); }
-        .trend-bg { position: absolute; right: -25px; bottom: -25px; width: 150px; opacity: 0.5; filter: blur(5px); transform: rotate(-15deg); transition: 0.4s; pointer-events: none; }
+        .trend-bg { position: absolute; right: -25px; bottom: -25px; width: 150px; opacity: 0.5; filter: blur(5px); transform: rotate(-15deg); pointer-events: none; }
         .trend-badge { position: absolute; top: 16px; right: 16px; background: var(--primary); color: white; font-size: 10px; padding: 5px 12px; border-radius: 20px; font-weight: 800; z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.2); text-transform: uppercase; letter-spacing: 0.5px; }
         .trend-name { font-size: 20px; font-weight: 800; width: 85%; line-height: 1.3; margin-bottom: 6px; z-index: 2; position: relative; letter-spacing: -0.5px; }
         .trend-act { font-size: 13px; color: var(--text-muted); font-weight: 600; z-index: 2; position: relative; }
@@ -168,10 +183,9 @@
         .clean-card {
             background: var(--bg-card); padding: 16px; border-radius: 22px;
             border: 1px solid var(--card-border); display: flex; align-items: center; gap: 16px;
-            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; 
-            box-shadow: var(--shadow); position: relative; overflow: hidden;
+            cursor: pointer; box-shadow: var(--shadow); position: relative; overflow: hidden;
+            transition: transform 0.2s, background-color 0.25s ease, border-color 0.25s ease;
         }
-        body.app-ready .clean-card { transition: transform 0.2s, box-shadow 0.2s, background 0.4s; }
         .clean-card:active { transform: scale(0.96); }
 
         .view-grid .clean-card { flex-direction: column; text-align: center; height: auto; padding: 20px 16px; }
@@ -181,11 +195,12 @@
         .view-grid .clean-card .btn-unduh { width: 100%; margin-top: 12px; padding: 10px; }
 
         .icon-wrap { position: relative; width: 60px; height: 60px; flex-shrink: 0; }
-        .clean-icon { width: 100%; height: 100%; border-radius: 16px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.08); background-color: var(--border); pointer-events: none; }
+        .clean-icon { width: 100%; height: 100%; border-radius: 16px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.08); background-color: var(--border); pointer-events: none; transition: background-color 0.25s ease; }
         .mod-label {
             position: absolute; bottom: -5px; right: -5px; background: var(--accent); color: white;
             font-size: 9px; font-weight: 800; padding: 3px 6px; border-radius: 8px; 
             border: 2px solid var(--bg-card); box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 5;
+            transition: border-color 0.25s ease;
         }
         
         .clean-info { flex: 1; min-width: 0; display: flex; align-items: center; }
@@ -193,19 +208,20 @@
             font-size: 15px; font-weight: 700; color: var(--text-main);
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
             overflow: hidden; text-overflow: ellipsis; line-height: 1.35; letter-spacing: -0.2px;
+            transition: color 0.25s ease;
         }
 
         .btn-unduh {
             background: color-mix(in srgb, var(--primary) 12%, transparent);
             color: var(--primary); padding: 8px 18px; height: auto; min-height: 34px;
             border-radius: 50px; font-size: 12px; font-weight: 800; border: none;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.2s;
         }
         
         .btn-loadmore {
             width: 100%; padding: 16px; margin-top: 20px; background: var(--bg-card); 
             border: 2px dashed var(--border); color: var(--primary); font-weight: 800; font-size: 14px;
-            border-radius: 18px; cursor: pointer; text-align: center; transition: 0.3s; letter-spacing: -0.3px;
+            border-radius: 18px; cursor: pointer; text-align: center; transition: transform 0.2s, background-color 0.25s ease, border-color 0.25s ease; letter-spacing: -0.3px;
         }
         .btn-loadmore.hidden { display: none; }
         
@@ -231,7 +247,7 @@
             color: white; font-size: 20px; cursor: pointer; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
             position: relative; transition: transform 0.2s;
         }
-        .rocket-btn i { transform: rotate(-45deg); transition: 0.3s; }
+        .rocket-btn i { transform: rotate(-45deg); transition: transform 0.3s; }
         .smoke-particle {
             position: absolute; width: 10px; height: 10px; background: rgba(200,200,200,0.8);
             border-radius: 50%; bottom: -10px; left: 50%; transform: translateX(-50%);
@@ -254,22 +270,22 @@
             justify-content: space-evenly; align-items: center; z-index: 1900;
             transform: translateZ(0);
         }
-        body.app-ready .bottom-nav { transition: background 0.4s, border 0.4s; }
+        .bottom-nav { transition: background-color 0.25s ease, border-color 0.25s ease; }
 
         .nav-item { 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 4px; color: var(--text-muted); cursor: pointer; flex: 1; height: 100%; transition: 0.2s;
+            gap: 4px; color: var(--text-muted); cursor: pointer; flex: 1; height: 100%; transition: color 0.2s;
         }
-        .nav-item i { font-size: 22px; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .nav-item ion-icon { font-size: 24px; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .nav-item span { font-size: 10px; font-weight: 600; }
         .nav-item.active { color: var(--primary); }
-        .nav-item.active i { transform: scale(1.15) translateY(-2px); }
+        .nav-item.active ion-icon { transform: scale(1.15) translateY(-2px); }
 
         /* --- MODAL SETTINGS --- */
         .modal { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0); z-index: 2100; display: flex; align-items: flex-end; 
-            opacity: 0; visibility: hidden; transition: background 0.4s ease, opacity 0.4s, visibility 0.4s; 
+            opacity: 0; visibility: hidden; transition: background-color 0.4s ease, opacity 0.4s, visibility 0.4s; 
         }
         .modal.active { background: rgba(0,0,0,0.6); opacity: 1; visibility: visible; }
         
@@ -278,7 +294,7 @@
             padding: 30px 24px calc(30px + env(safe-area-inset-bottom, 0px)); 
             border-radius: 35px 35px 0 0; border-top: 1px solid var(--border); 
             box-shadow: 0 -10px 40px rgba(0,0,0,0.1); max-height: 85vh; overflow-y: auto; 
-            transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s; 
+            transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease; 
         }
         .modal.active .modal-box { transform: translateY(0); }
         .modal-handle { width: 50px; height: 5px; background: var(--text-muted); opacity: 0.3; border-radius: 10px; margin: 0 auto 20px auto; }
@@ -286,27 +302,27 @@
         .set-group { margin-bottom: 25px; }
         .set-title { font-weight: 800; font-size: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; letter-spacing: -0.2px; }
         
-        .segmented-control { display: flex; background: var(--search-bg); border-radius: 12px; padding: 3px; }
+        .segmented-control { display: flex; background: var(--search-bg); border-radius: 12px; padding: 3px; transition: background-color 0.25s ease; }
         .seg-btn {
             flex: 1; text-align: center; padding: 10px; border-radius: 10px;
             font-size: 13px; font-weight: 700; color: var(--text-main);
-            background: transparent; border: none; cursor: pointer; transition: 0.3s;
+            background: transparent; border: none; cursor: pointer; transition: background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
         }
         .seg-btn.active { background: var(--bg-card); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
         
         .color-grid { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
-        .color-item { width: 42px; height: 42px; border-radius: 50%; border: 3px solid var(--border); cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .color-item { width: 42px; height: 42px; border-radius: 50%; border: 3px solid var(--border); cursor: pointer; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.25s ease; position: relative; }
         .color-item.active { transform: scale(1.15); border-color: var(--text-main); }
-        .color-item::after { content:'\f00c'; font-family:'Font Awesome 6 Free'; font-weight:900; color:white; font-size:14px; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%) scale(0); transition:0.2s; }
+        .color-item::after { content:'\f00c'; font-family:'Font Awesome 6 Free'; font-weight:900; color:white; font-size:14px; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%) scale(0); transition: transform 0.2s; }
         .color-item.active::after { transform:translate(-50%, -50%) scale(1); }
 
-        .toggle-switch { width: 51px; height: 31px; background: var(--search-bg); border-radius: 31px; position: relative; cursor: pointer; transition: background 0.3s; }
+        .toggle-switch { width: 51px; height: 31px; background: var(--search-bg); border-radius: 31px; position: relative; cursor: pointer; transition: background-color 0.25s ease; }
         .toggle-switch::after { content:''; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; background: white; border-radius: 50%; transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .toggle-switch.active { background: #34c759; }
         .toggle-switch.active::after { left: 22px; }
 
         .modal-actions { display: flex; gap: 12px; margin-top: 35px; }
-        .modal-actions button { flex: 1; padding: 16px; border-radius: 16px; font-weight: 800; font-size: 14px; cursor: pointer; transition: 0.2s; border: none; letter-spacing: -0.3px; }
+        .modal-actions button { flex: 1; padding: 16px; border-radius: 16px; font-weight: 800; font-size: 14px; cursor: pointer; transition: transform 0.2s, background-color 0.25s ease, color 0.25s ease; border: none; letter-spacing: -0.3px; }
         .btn-reset { background: var(--search-bg); color: var(--text-main); }
         .btn-close { background: var(--text-main); color: var(--bg-body); flex: 2; }
         .modal-actions button:active { transform: scale(0.96); }
@@ -327,7 +343,7 @@
 
     <div id="mainView">
         <div id="section-recom">
-            <div class="section-head"><i class="fa-solid fa-star"></i> Recomended</div>
+            <div class="section-head"><ion-icon name="sparkles" class="recom-icon"></ion-icon> Recomended</div>
             <div class="recom-wrap"><div class="recom-scroll" id="recomContainer">
                 <div class="skeleton skel-trend"></div>
                 <div class="skeleton skel-trend"></div>
@@ -335,7 +351,7 @@
         </div>
         
         <div id="section-apps">
-            <div class="section-head"><i class="fa-brands fa-android"></i> Apps</div>
+            <div class="section-head"><ion-icon name="grid" class="apps-icon"></ion-icon> Apps</div>
             <div class="list-container view-list" id="appsContainer">
                 <div class="skel-card"><div class="skeleton skel-icon"></div><div class="skel-info"><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div><div class="skeleton skel-btn"></div></div>
                 <div class="skel-card"><div class="skeleton skel-icon"></div><div class="skel-info"><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div><div class="skeleton skel-btn"></div></div>
@@ -345,7 +361,7 @@
         </div>
         
         <div id="section-games">
-            <div class="section-head"><i class="fa-solid fa-gamepad"></i> Games</div>
+            <div class="section-head"><ion-icon name="game-controller" class="games-icon"></ion-icon> Games</div>
             <div class="list-container view-list" id="gamesContainer">
                 <div class="skel-card"><div class="skeleton skel-icon"></div><div class="skel-info"><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div><div class="skeleton skel-btn"></div></div>
                 <div class="skel-card"><div class="skeleton skel-icon"></div><div class="skel-info"><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div><div class="skeleton skel-btn"></div></div>
@@ -418,30 +434,24 @@
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="nav('all', this)"><i class="fa-solid fa-house"></i><span>Home</span></div>
-        <div class="nav-item" onclick="nav('app', this)"><i class="fa-brands fa-android"></i><span>Apps</span></div>
-        <div class="nav-item" onclick="nav('game', this)"><i class="fa-solid fa-gamepad"></i><span>Games</span></div>
-        <div class="nav-item" onclick="toggleSet()"><i class="fa-solid fa-gear"></i><span>Setting</span></div>
+        <div class="nav-item active" onclick="nav('all', this)"><ion-icon name="home"></ion-icon><span>Home</span></div>
+        <div class="nav-item" onclick="nav('app', this)"><ion-icon name="grid"></ion-icon><span>Apps</span></div>
+        <div class="nav-item" onclick="nav('game', this)"><ion-icon name="game-controller"></ion-icon><span>Games</span></div>
+        <div class="nav-item" onclick="toggleSet()"><ion-icon name="settings"></ion-icon><span>Setting</span></div>
     </div>
 
     <script>
-        // --- GITHUB CONFIGURATION (MUST BE FILLED) ---
         const GITHUB_CONFIG = {
-            owner: 'modora-official',   // Replace with your GitHub username
-            repo: 'modora1',    // Replace with your repository name
-            branch: 'main'       // Main branch (usually 'main' or 'master')
+            owner: 'modora-official',   
+            repo: 'modora1',    
+            branch: 'main'       
         };
-        // ----------------------------------------
 
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => { document.body.classList.add('app-ready'); }, 50);
         });
 
         document.getElementById('year').innerText = new Date().getFullYear();
-
-        /* ================================================================
-           AUTO SCAN SYSTEM 4.0 (GITHUB PAGES API INTEGRATION)
-           ================================================================ */
 
         let dbApps = [];
         let dbGames = [];
@@ -524,10 +534,6 @@
             renderRecom();
             renderLists();
         }
-
-        /* ================================================================
-           UI RENDERING
-           ================================================================ */
 
         function renderRecom() {
             const container = document.getElementById('recomContainer');
@@ -643,7 +649,6 @@
             restoreView(); window.scrollTo(0,0);
         }
 
-        // --- SETTINGS LOGIC ---
         function toggleSet() { document.getElementById('modalSet').classList.toggle('active'); }
 
         function loadSettings() {
@@ -666,7 +671,7 @@
                 updateColorActive('#2563eb');
             }
 
-            setViewMode(localStorage.getItem('modora_view') || 'list');
+            applyViewModeClass(localStorage.getItem('modora_view') || 'list');
             
             const currFont = localStorage.getItem('modora_font') || 'Plus Jakarta Sans';
             document.querySelectorAll('.seg-btn[onclick*="chFont"]').forEach(b => b.classList.remove('active'));
@@ -675,7 +680,9 @@
             else document.getElementById('btnFontTech').classList.add('active');
         }
 
+        // --- FUNGSI TEMA YANG SUDAH DIPERBAIKI (TIDAK LAG) ---
         function switchTheme() {
+            // Langsung eksekusi tanpa document.startViewTransition()
             const isLight = document.documentElement.classList.toggle('light-mode');
             const toggleBtn = document.getElementById('themeToggle');
             const metaTheme = document.getElementById('metaThemeColor');
@@ -712,7 +719,18 @@
             });
         }
 
+        // View Transition HANYA dibiarkan di ViewMode (List/Grid)
         function setViewMode(mode) {
+            if (!document.startViewTransition) {
+                applyViewModeClass(mode);
+                return;
+            }
+            document.startViewTransition(() => {
+                applyViewModeClass(mode);
+            });
+        }
+
+        function applyViewModeClass(mode) {
             const cApps = document.getElementById('appsContainer');
             const cGames = document.getElementById('gamesContainer');
             cApps.className = `list-container view-${mode}`;
@@ -736,7 +754,6 @@
             window.location.reload();
         }
 
-        // --- ROCKET ANIMATION ---
         const rocketWrap = document.getElementById('rocket');
         const rocketBtn = document.getElementById('rocketBtn');
         let isLaunching = false;
